@@ -5,76 +5,86 @@ import AvatarIcon from '../assets/images/avatar.png'
 const Karyawan = () => {
 
 
-  // const [loading, setLoading] = useState(false)
   const [employees, setEmployees] = useState([])
-  // const [employeesPerPage, setEmployeesPerPage] = useState(10)
+  const [loading, setLoading] = useState(false)
 
-  const getEmployees = async () => {
-   
+  const getEmployees = async (result) => {
+
+    setLoading(true)
+
     const {data} = await axios('https://ayohadir.id/v1/karyawan')
     setEmployees(data.results)
+    
+    setLoading(false)
    
   }
 
   useEffect(() => {
 
-    // setLoading(true)
+
     getEmployees()
-    // setLoading(false)
+    
 
   }, [])
 
-  return (
-    <div className="Karyawan">
 
+  return (
+    <div className="Karyawan mt-5">
       
       <div className='row justify-content-center'>
         <div className='col-md-6 col-sm-12'>
         
-          <div class="d-grid">
-            <button className='btn btn-warning text-white fw-bold btn-lg btn-block'>Tambah Karyawan</button>
+          <div className="d-grid">
+            <button className='btn btn-warning text-white fw-bold btn-lg btn-block'> + Tambah Karyawan</button>
           </div>
-          
-      <div className='card mt-3 rounded-0'>
-      <table className="table table-hover">
-        <thead className='bg-primary text-white'>
-          <tr>
-            <th scope="col">No.</th>
-            <th scope="col">ID</th>
-            <th scope="col">Karyawan</th>
-          </tr>
-        </thead>
-        <tbody>
-       
 
-
-    {employees.map((result, index)=>{
-
-      return (
-              <tr key={index}>
-                <th scope="row">{index+1}</th>
-                <td>
-                  00{result.user_id}
-                </td>
-               
-                <td>
-                  <img src={AvatarIcon} alt="avatar" className='me-3' width="35" />
+            <table className="table table-hover table-bordered my-3">
+              <thead className='bg-primary text-white'>
+                <tr>
+                  <th scope="col" className='text-center'>No.</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Karyawan</th>
+                </tr>
+              </thead>
+              <tbody>
+ 
+                {loading &&  <tr className='ms-3'><td>Loading..</td></tr> }
+ 
+                {employees.map((result, index)=>{
+                  
+                  return (
                     
-                   {result.karyawan}
-                </td>
-                
-              </tr>
-      )
+                    <tr key={index}>
+                        
+                        <th scope="row" className='text-center'>{index+1}</th>
+                        <td>
+                          <span className='badge text-bg-info my-2 text-white item-center rounded-4 py-2'>
+                            ID - 0{result.user_id}
 
-    })}
-     </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
+                          </span>
+                        </td>
+                        
+                        <td>
+                          <img src={AvatarIcon} alt="avatar" className='me-3' width="35" />
+                            
+                            <span className='text-secondary'>{result.karyawan}</span>
+                        </td>
+                        </tr>
+                        
+                      
+                    )
 
+                    }
 
+                    )}
+               
+              </tbody>
+            </table>
         </div>
+      </div>
+
+
+</div>
 
 
      

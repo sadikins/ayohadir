@@ -1,22 +1,23 @@
 
-// import Absen from './components/Absen';
+import Absen from './components/Absen';
 import Karyawan  from './components/Karyawan'
-import Logo from './components/Logo'
 import "./App.css"
-
+import Navigation from './components/Navigation';
+import Footer from './components/Footer'
 
 function App() {
 
   return (
     <div className='App'>
+      <Navigation/>
+    <div className="container h-100">
 
-    <div className="container">
-
-      <Logo/>
-      <Karyawan/>
-      {/* <Absen/> */}
+      {/* <Logo/> */}
+      {/* <Karyawan/> */}
+      <Absen/>
 
     </div>
+    <Footer/>
     </div>
 
   )
