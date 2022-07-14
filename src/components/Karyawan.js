@@ -7,12 +7,17 @@ const Karyawan = () => {
 
   const [employees, setEmployees] = useState([])
   const [loading, setLoading] = useState(false)
+  
 
   const getEmployees = async (result) => {
 
     setLoading(true)
 
     const {data} = await axios('https://ayohadir.id/v1/karyawan')
+    
+    // console.log(data.results)
+    
+
     setEmployees(data.results)
     
     setLoading(false)
@@ -27,18 +32,16 @@ const Karyawan = () => {
 
   }, [])
 
+  
 
   return (
-    <div className="Karyawan mt-5">
+    <div className="container mt-5">
       
       <div className='row justify-content-center'>
         <div className='col-md-6 col-sm-12'>
         
-          <div className="d-grid">
-            <button className='btn btn-warning text-white fw-bold btn-lg btn-block'> + Tambah Karyawan</button>
-          </div>
 
-            <table className="table table-hover table-bordered my-3">
+            <table className="table table-hover my-3">
               <thead className='bg-primary text-white'>
                 <tr>
                   <th scope="col" className='text-center'>No.</th>
@@ -56,7 +59,7 @@ const Karyawan = () => {
                     
                     <tr key={index}>
                         
-                        <th scope="row" className='text-center'>{index+1}</th>
+                        <th scope="row" className='text-center'>{index+1} . </th>
                         <td>
                           <span className='badge text-bg-info my-2 text-white item-center rounded-4 py-2'>
                             ID - 0{result.user_id}
@@ -70,11 +73,8 @@ const Karyawan = () => {
                             <span className='text-secondary'>{result.karyawan}</span>
                         </td>
                         </tr>
-                        
                       
-                    )
-
-                    }
+                      )}
 
                     )}
                
