@@ -1,10 +1,23 @@
 
-import { Karyawan } from './components/Karyawan'
+// import Absen from './components/Absen';
+import Karyawan  from './components/Karyawan'
+import Logo from './components/Logo'
+import "./App.css"
+
 
 function App() {
 
   return (
-    <Karyawan/>
+    <div className='App'>
+
+    <div className="container">
+
+      <Logo/>
+      <Karyawan/>
+      {/* <Absen/> */}
+
+    </div>
+    </div>
 
   )
 }

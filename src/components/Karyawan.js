@@ -1,32 +1,47 @@
-import axios from 'axios'
 import {useState, useEffect} from 'react'
+import axios from 'axios'
+import AvatarIcon from '../assets/images/avatar.png'
 
-export const Karyawan = () => {
+const Karyawan = () => {
 
 
-const [employees, setEmployees] = useState([])
+  // const [loading, setLoading] = useState(false)
+  const [employees, setEmployees] = useState([])
+  // const [employeesPerPage, setEmployeesPerPage] = useState(10)
 
   const getEmployees = async () => {
-    const {data} = await axios("https://ayohadir.id/v1/karyawan")
+   
+    const {data} = await axios('https://ayohadir.id/v1/karyawan')
     setEmployees(data.results)
+   
   }
 
   useEffect(() => {
 
+    // setLoading(true)
     getEmployees()
+    // setLoading(false)
 
   }, [])
+
   return (
-    <div className="App">
+    <div className="Karyawan">
 
-      <h2>AYOHADIR</h2>
-
-      <table>
-        <thead>
+      
+      <div className='row justify-content-center'>
+        <div className='col-md-6 col-sm-12'>
+        
+          <div class="d-grid">
+            <button className='btn btn-warning text-white fw-bold btn-lg btn-block'>Tambah Karyawan</button>
+          </div>
+          
+      <div className='card mt-3 rounded-0'>
+      <table className="table table-hover">
+        <thead className='bg-primary text-white'>
           <tr>
-            <th>User ID</th>
-            <th>Nama Karyawan</th>
-            <th>Jam Absen</th>
+            <th scope="col">No.</th>
+            <th scope="col">ID</th>
+            <th scope="col">Karyawan</th>
           </tr>
         </thead>
         <tbody>
@@ -36,26 +51,35 @@ const [employees, setEmployees] = useState([])
     {employees.map((result, index)=>{
 
       return (
-
-         
-
               <tr key={index}>
-                <td>{result.user_id}</td>
-                <td>{result.karyawan}</td>
+                <th scope="row">{index+1}</th>
+                <td>
+                  00{result.user_id}
+                </td>
+               
+                <td>
+                  <img src={AvatarIcon} alt="avatar" className='me-3' width="35" />
+                    
+                   {result.karyawan}
+                </td>
+                
               </tr>
-          
-           
       )
 
     })}
      </tbody>
-
-          </table>
+    </table>
+    </div>
+    </div>
+    </div>
 
 
         </div>
+
 
      
    
   );
 }
+
+export default Karyawan;
